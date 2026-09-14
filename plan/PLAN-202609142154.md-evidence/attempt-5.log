@@ -1,0 +1,104 @@
+
+> pi-web-tools@0.1.0 typecheck
+> tsc --noEmit
+
+
+> pi-web-tools@0.1.0 test
+> tsx --test tests/unit/*.test.ts
+
+✔ missing configuration defaults to native OpenAI with no subscription opt-in (0.932916ms)
+✔ credentials explicit and mutually exclusive, validation never echoes secret values (0.407334ms)
+✔ invalid JSON does not expose config contents (0.658333ms)
+✔ partial fetch override retains defaults and OpenAI keys are rejected (0.100958ms)
+✔ OpenAI only registers web_fetch; Brave/Exa register local search (1.771292ms)
+✔ native hook restricted by model and mode, guidance matches capability (0.397166ms)
+✔ conflict explicitly aborts even when the runner swallows hook errors (0.180875ms)
+✔ shutdown before any fetch does not need a browser (0.120667ms)
+✔ main extraction preserves GFM tables, fenced code and absolute safe links (44.989292ms)
+✔ body/text mode strips noise and does not trust a supplied base URL (12.670334ms)
+✔ automatic extraction and missing-main fallback return usable content (22.339917ms)
+✔ challenge and login detection warn without claiming authenticated content (12.784166ms)
+✔ empty and byte-oversized documents are errors rather than successful empty output (31.173167ms)
+✔ public-address policy rejects special IPv4, IPv6 and mapped IPv4 ranges (1.689583ms)
+✔ URL policy rejects credentials, unsafe protocols, normalized private IPs and local names (0.503916ms)
+✔ DNS policy checks every result and sanitizes lookup errors (0.391541ms)
+✔ queue is bounded, FIFO, abort-aware and releases slots only once (0.317333ms)
+✔ pre-abort, default private-network rejection, and close do not require browser startup (0.669834ms)
+✔ native injection is additive, immutable and idempotent (0.908208ms)
+✔ respects native preview and existing tool choice (0.09225ms)
+✔ local search conflicts are never silently removed (0.24025ms)
+✔ only known OpenAI Responses providers enabled, Codex explicitly experimental (0.095542ms)
+✔ Unicode byte clipping and terminal control cleanup (0.5595ms)
+✔ long output is bounded including notice, full content private and readable (15.54575ms)
+✔ pi 0.85.1 native annotation-only URLs are lost, explicit Markdown URLs survive (1.057208ms)
+✔ Brave query encoding, header, snippets and source deduplication (19.23825ms)
+✔ Exa uses auto search and highlights without extra model synthesis (0.403833ms)
+✔ HTTP errors and invalid payloads never leak upstream secrets; no retries (0.992666ms)
+✔ cancellation reaches HTTP and pre-aborted calls never send requests (0.4375ms)
+✔ deadline cancels and provider selection cannot silently fall back (21.625916ms)
+✔ present malformed Brave section is not confused with an empty search (0.81ms)
+✔ legitimate empty results and bounded response bodies (0.874583ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 808.083084
+
+> pi-web-tools@0.1.0 test:integration
+> tsx --test tests/integration/*.test.ts
+
+▶ real Chromium rendered fetch, isolation, routing and cleanup
+  ✔ renders SPA content and preserves tables, code and absolute links (756.165584ms)
+  ✔ follows multiple validated redirects and reports the final URL (332.570208ms)
+  ✔ concurrent requests have independent cookies and localStorage (999.89075ms)
+  ✔ unsafe second redirect hop and subresource redirect never reach the destination (662.399709ms)
+  ✔ blocks WebSockets/service workers and warns about obvious access/login challenges (1102.123208ms)
+  ✔ HTTP errors, downloads, PDFs, empty pages and oversized rendered HTML fail explicitly (1515.360917ms)
+  ✔ cancellation tears down an in-flight context and allows recovery (587.958666ms)
+  ✔ shutdown closes the shared browser and rejects subsequent work (65.914125ms)
+✔ real Chromium rendered fetch, isolation, routing and cleanup (6029.854458ms)
+✔ queue cancellation and shutdown are bounded and do not start queued requests (551.06025ms)
+✔ deadline covers queue/navigation/selector waits and idle browser is reaped (4046.956792ms)
+✔ real pi loader discovers package and switches tool registration in isolated HOME (4470.5075ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11278.723833
+npm notice
+npm notice 📦  pi-web-tools@0.1.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 10.0kB README.md
+npm notice 387B examples/web_search.json
+npm notice 1.2kB package.json
+npm notice 1.7kB schemas/web_search.schema.json
+npm notice 5.1kB src/config.ts
+npm notice 5.0kB src/fetch/extract.ts
+npm notice 99B src/fetch/index.ts
+npm notice 2.6kB src/fetch/network.ts
+npm notice 17.4kB src/fetch/service.ts
+npm notice 7.3kB src/index.ts
+npm notice 2.3kB src/native-openai.ts
+npm notice 1.7kB src/output.ts
+npm notice 6.3kB src/search.ts
+npm notice 111B src/vendor.d.ts
+npm notice Tarball Details
+npm notice name: pi-web-tools
+npm notice version: 0.1.0
+npm notice filename: pi-web-tools-0.1.0.tgz
+npm notice package size: 22.0 kB
+npm notice unpacked size: 62.4 kB
+npm notice shasum: 814ee76177cc6cd1213d3e9c67095351194979a4
+npm notice integrity: sha512-Hes6doas2FPca[...]W4n0d4fmAJuIA==
+npm notice total files: 15
+npm notice
+pi-web-tools-0.1.0.tgz
+Production tarball install and isolated pi lazy-import smoke PASS
+{"loaded":true,"tools":["web_fetch"]}

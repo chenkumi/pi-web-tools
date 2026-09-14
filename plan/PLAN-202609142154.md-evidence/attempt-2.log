@@ -1,0 +1,109 @@
+
+> pi-web-tools@0.1.0 typecheck
+> tsc --noEmit
+
+
+> pi-web-tools@0.1.0 test
+> tsx --test tests/unit/*.test.ts
+
+✔ missing configuration defaults to native OpenAI with no subscription opt-in (1.217208ms)
+✔ credentials explicit and mutually exclusive, validation never echoes secret values (0.431125ms)
+✔ invalid JSON does not expose config contents (2.265667ms)
+✔ partial fetch override retains defaults and OpenAI keys are rejected (0.113125ms)
+✔ OpenAI only registers web_fetch; Brave/Exa register local search (1.846083ms)
+✔ native hook restricted by model and mode, guidance matches capability (0.415917ms)
+✔ shutdown before any fetch does not need a browser (0.131ms)
+✔ main extraction preserves GFM tables, fenced code and absolute safe links (44.6125ms)
+✔ body/text mode strips noise and does not trust a supplied base URL (12.161958ms)
+✔ automatic extraction and missing-main fallback return usable content (21.097458ms)
+✔ challenge and login detection warn without claiming authenticated content (7.600834ms)
+✔ empty and byte-oversized documents are errors rather than successful empty output (32.07425ms)
+✔ public-address policy rejects special IPv4, IPv6 and mapped IPv4 ranges (1.680042ms)
+✔ URL policy rejects credentials, unsafe protocols, normalized private IPs and local names (1.660917ms)
+✔ DNS policy checks every result and sanitizes lookup errors (0.407833ms)
+✔ queue is bounded, FIFO, abort-aware and releases slots only once (0.315584ms)
+✔ pre-abort, default private-network rejection, and close do not require browser startup (0.670042ms)
+✔ native injection is additive, immutable and idempotent (4.44275ms)
+✔ respects native preview and existing tool choice (0.103875ms)
+✔ local search conflicts are never silently removed (0.24625ms)
+✔ only known OpenAI Responses providers enabled, Codex explicitly experimental (1.736042ms)
+✔ Unicode byte clipping and terminal control cleanup (1.0275ms)
+✔ long output is bounded including notice, full content private and readable (39.118167ms)
+✔ Brave query encoding, header, snippets and source deduplication (55.190708ms)
+✔ Exa uses auto search and highlights without extra model synthesis (1.043833ms)
+✔ HTTP errors and invalid payloads never leak upstream secrets; no retries (2.441459ms)
+✔ cancellation reaches HTTP and pre-aborted calls never send requests (0.505625ms)
+✔ deadline cancels and provider selection cannot silently fall back (21.48725ms)
+✔ legitimate empty results and bounded response bodies (1.1655ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1074.616458
+
+> pi-web-tools@0.1.0 test:integration
+> tsx --test tests/integration/*.test.ts
+
+▶ real Chromium rendered fetch, isolation, routing and cleanup
+  ✔ renders SPA content and preserves tables, code and absolute links (3876.038917ms)
+  ✔ follows multiple validated redirects and reports the final URL (519.4305ms)
+  ✔ concurrent requests have independent cookies and localStorage (1724.251375ms)
+  ✔ unsafe second redirect hop and subresource redirect never reach the destination (644.085833ms)
+  ✔ blocks WebSockets/service workers and warns about obvious access/login challenges (1096.261666ms)
+  ✔ HTTP errors, downloads, PDFs, empty pages and oversized rendered HTML fail explicitly (1533.6595ms)
+  ✖ cancellation tears down an in-flight context and allows recovery (151.55975ms)
+  ✔ shutdown closes the shared browser and rejects subsequent work (54.104708ms)
+✖ real Chromium rendered fetch, isolation, routing and cleanup (9608.496291ms)
+✔ queue cancellation and shutdown are bounded and do not start queued requests (470.137542ms)
+✖ deadline covers queue/navigation/selector waits and idle browser is reaped (33225.555708ms)
+✔ real pi loader discovers package and switches tool registration in isolated HOME (5437.241791ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 9
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 43972.808416
+
+✖ failing tests:
+
+test at tests/integration/fetch.test.ts:138:11
+✖ cancellation tears down an in-flight context and allows recovery (151.55975ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (/Users/ckm/Desktop/pi-web-tools/tests/integration/fetch.test.ts:145:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async TestContext.<anonymous> (/Users/ckm/Desktop/pi-web-tools/tests/integration/fetch.test.ts:138:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/integration/fetch.test.ts:182:1
+✖ deadline covers queue/navigation/selector waits and idle browser is reaped (33225.555708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (/Users/ckm/Desktop/pi-web-tools/tests/integration/fetch.test.ts:195:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

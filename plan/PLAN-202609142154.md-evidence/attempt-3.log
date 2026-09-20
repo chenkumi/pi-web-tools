@@ -1,5 +1,0 @@
-
-> pi-web-tools@0.1.0 typecheck
-> tsc --noEmit
-
-tests/unit/pi-citation-compat.test.ts(3,45): error TS2305: Module '"@earendil-works/pi-ai"' has no exported member 'getModel'.

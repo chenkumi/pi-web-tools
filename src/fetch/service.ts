@@ -2,6 +2,7 @@ import { performance } from 'node:perf_hooks';
 import { chromium, type Browser, type BrowserContext, type Route } from 'playwright';
 import { extractHtml, MAX_HTML_BYTES, type ContentFormat, type ExtractionMode } from './extract.js';
 import { NetworkPolicy, parseWebUrl } from './network.js';
+import { installPlaywrightTlsCompatibility } from './playwright-tls-compat.js';
 
 export type FetchOptions = {
   channel: 'chromium' | 'chrome';
@@ -83,6 +84,7 @@ export class FetchService {
   private closePromise?: Promise<void>;
 
   constructor(private readonly options: FetchOptions, testOptions?: { allowPrivateNetwork?: boolean }) {
+    installPlaywrightTlsCompatibility();
     if (!['chromium', 'chrome'].includes(options.channel) ||
         !Number.isFinite(options.timeoutMs) || options.timeoutMs <= 0 ||
         !Number.isInteger(options.maxConcurrency) || options.maxConcurrency < 1 || options.maxConcurrency > 32 ||

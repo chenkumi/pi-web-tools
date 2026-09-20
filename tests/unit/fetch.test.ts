@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
+import { Socket } from 'node:net';
+import { TLSSocket } from 'node:tls';
 import test from 'node:test';
 import { extractHtml, MAX_EXTRACTED_BYTES, MAX_HTML_BYTES } from '../../src/fetch/extract.js';
 import { isPublicAddress, NetworkPolicy, parseWebUrl } from '../../src/fetch/network.js';
+import { certificateOrEmpty, installPlaywrightTlsCompatibility } from '../../src/fetch/playwright-tls-compat.js';
 import { FetchQueue, FetchService } from '../../src/fetch/service.js';
 
 const article = `<!doctype html><title>Fixture article</title><nav>Discard navigation</nav><main>
@@ -11,6 +14,29 @@ const article = `<!doctype html><title>Fixture article</title><nav>Discard navig
 <a href="../safe?q=one">Relative link</a><a href="javascript:alert(1)">Unsafe link</a>
 <a href="https://user:password@example.org/">Credential link</a>
 </main><script>document.querySelector('main').textContent = 'SCRIPT_EXECUTED_BY_EXTRACTOR';</script><footer>Discard footer</footer>`;
+
+test('Playwright TLS compatibility handles a destroyed socket certificate result', () => {
+  const socket = new TLSSocket(new Socket());
+  socket.destroy();
+  assert.equal(socket.getPeerCertificate(), null);
+  assert.deepEqual(certificateOrEmpty(null), {});
+  installPlaywrightTlsCompatibility();
+  installPlaywrightTlsCompatibility();
+  assert.deepEqual(socket.getPeerCertificate(), {});
+});
+
+test('HTML extraction suppresses jsdom diagnostics from malformed CSS', () => {
+  const originalError = console.error;
+  const messages: unknown[][] = [];
+  console.error = (...args: unknown[]) => { messages.push(args); };
+  try {
+    const result = extractHtml('<style>}</style><main>Readable content</main>', 'https://example.org/', 'text');
+    assert.equal(result.content, 'Readable content');
+    assert.deepEqual(messages, []);
+  } finally {
+    console.error = originalError;
+  }
+});
 
 test('main extraction preserves GFM tables, fenced code and absolute safe links', () => {
   const result = extractHtml(article, 'https://example.org/path/page', 'markdown', 'main');

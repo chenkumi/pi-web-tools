@@ -13,7 +13,7 @@ export interface Config {
   providers: { openai: { experimentalCodex: boolean }; brave: Credential; exa: Credential };
   fetch: { channel: 'chromium' | 'chrome'; timeoutMs: number; maxConcurrency: number; idleTimeoutMs: number };
 }
-export const CONFIG_PATH = join(homedir(), '.pi', 'agent', 'web_search.json');
+export const CONFIG_PATH = join(homedir(), '.pi', 'agent', 'web-search.json');
 export const defaults = (): Config => ({
   version: 1, provider: 'openai', enabled: true, numResults: 5, searchTimeoutMs: 60000,
   providers: { openai: { experimentalCodex: false }, brave: { apiKeyEnv: 'BRAVE_API_KEY' }, exa: { apiKeyEnv: 'EXA_API_KEY' } },

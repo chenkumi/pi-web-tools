@@ -26,7 +26,7 @@ Chromium 由 Playwright 的明確安裝指令下載，extension 載入時不下�
 
 ## 設定
 
-固定路徑：**`~/.pi/agent/web_search.json`**。設定只在 extension 載入時讀取，變更後 `/reload`；不覆寫 pi 的 `settings.json`／`auth.json`。
+固定路徑：**`~/.pi/agent/web-search.json`**。設定只在 extension 載入時讀取，變更後 `/reload`；不覆寫 pi 的 `settings.json`／`auth.json`。
 
 ### OpenAI 原生搜尋（預設）
 
@@ -102,9 +102,9 @@ Chromium 由 Playwright 的明確安裝指令下載，extension 載入時不下�
 
 使用 Search endpoint、`type: "auto"` 及 highlights，不啟用額外生成答案功能。
 
-也可用 `"apiKey": "your-key"`，但不可與 `apiKeyEnv` 同時出現；建議優先環境變數。明文設定應 `chmod 600 ~/.pi/agent/web_search.json`。不支援 shell command 型密鑰。錯誤訊息不包含 HTTP 回應 body 或認證 headers。
+也可用 `"apiKey": "your-key"`，但不可與 `apiKeyEnv` 同時出現；建議優先環境變數。明文設定應 `chmod 600 ~/.pi/agent/web-search.json`。不支援 shell command 型密鑰。錯誤訊息不包含 HTTP 回應 body 或認證 headers。
 
-完整範例見 [examples/web_search.json](examples/web_search.json)，結構見 [schemas/web_search.schema.json](schemas/web_search.schema.json)。Schema 檔供編輯器外部關聯；設定本身不接受 `$schema` 等未知欄位。
+完整範例見 [examples/web-search.json](examples/web-search.json)，結構見 [schemas/web_search.schema.json](schemas/web_search.schema.json)。Schema 檔供編輯器外部關聯；設定本身不接受 `$schema` 等未知欄位。
 
 其他設定：
 

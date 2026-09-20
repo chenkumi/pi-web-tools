@@ -14,7 +14,7 @@ test('real pi loader discovers package and switches tool registration in isolate
   try {
     await mkdir(join(home, '.pi', 'agent'), { recursive: true });
     for (const provider of ['openai', 'brave', 'exa']) {
-      await writeFile(join(home, '.pi', 'agent', 'web_search.json'), JSON.stringify({ provider }));
+      await writeFile(join(home, '.pi', 'agent', 'web-search.json'), JSON.stringify({ provider }));
       const expected = provider === 'openai' ? ['web_fetch'] : ['web_fetch', 'web_search'];
       const { stdout } = await exec(process.execPath, ['--import', import.meta.resolve('tsx'), join(root, 'tests/fixtures/load-package.ts'), root, JSON.stringify(expected)], {
         cwd: home, env: { PATH: process.env.PATH, HOME: home, USERPROFILE: home, PI_CODING_AGENT_DIR: join(home, '.pi', 'agent'), PI_OFFLINE: '1' }, timeout: 20000,

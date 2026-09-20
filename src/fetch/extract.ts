@@ -1,5 +1,5 @@
 import { Readability } from '@mozilla/readability';
-import { JSDOM } from 'jsdom';
+import { JSDOM, VirtualConsole } from 'jsdom';
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
 
@@ -36,8 +36,10 @@ function asText(element: Element): string {
 
 export function extractHtml(html: string, url: string, format: ContentFormat = 'markdown', mode: ExtractionMode = 'auto') {
   if (Buffer.byteLength(html, 'utf8') > MAX_HTML_BYTES) throw new Error('TOO_LARGE: Rendered HTML exceeds the 5 MiB limit.');
-  // No runScripts and no resources option: extraction never executes scripts or loads URLs.
-  const dom = new JSDOM(html, { url });
+  // No runScripts/resources: extraction never executes scripts or loads URLs.
+  // Suppress jsdom diagnostics from malformed third-party HTML/CSS; they are
+  // neither actionable to the agent nor a fetch failure.
+  const dom = new JSDOM(html, { url, virtualConsole: new VirtualConsole() });
   try {
     const document = dom.window.document;
     const warnings: string[] = [];
